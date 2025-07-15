@@ -7,4 +7,4 @@ C# bindings for the [MCL](https://github.com/herumi/mcl) library.
 
 ## License
 
-This library contains dynamically linked MCL binaries licensed under the [BSD-3-Clause](https://github.com/herumi/mcl/blob/master/COPYRIGHT) license.
+This project is licensed under the [MIT](./LICENSE) and contains dynamically linked MCL binaries licensed under the [BSD-3-Clause](https://github.com/herumi/mcl/blob/master/COPYRIGHT) license.

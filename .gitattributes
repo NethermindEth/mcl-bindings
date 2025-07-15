@@ -1,0 +1,4 @@
+* text=auto eol=lf
+src/Nethermind.MclBindings/runtimes/**/*.dll filter=lfs diff=lfs merge=lfs -text
+src/Nethermind.MclBindings/runtimes/**/*.dylib filter=lfs diff=lfs merge=lfs -text
+src/Nethermind.MclBindings/runtimes/**/*.so filter=lfs diff=lfs merge=lfs -text

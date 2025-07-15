@@ -1,0 +1,142 @@
+name: Build MCL
+
+on:
+  workflow_dispatch:
+    inputs:
+      create-pr:
+        description: Create a pull request
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  RETENTION: 7
+
+jobs:
+  build-linux:
+    name: Linux build
+    strategy:
+      matrix:
+        arch: [arm64, x64]
+    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-22.04-arm' || 'ubuntu-22.04' }}
+    steps:
+      - name: Check out mcl repository
+        uses: actions/checkout@v4
+        with:
+          repository: herumi/mcl
+
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake .. ${{ matrix.arch == 'arm64' && '-DCMAKE_CXX_COMPILER=clang++' || '' }}
+          make -j$(nproc)
+          strip lib/libmcl.so
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-${{ matrix.arch }}
+          path: build/lib/libmcl.so
+          retention-days: ${{ env.RETENTION }}
+          if-no-files-found: error
+
+  build-macos:
+    name: macOS build
+    strategy:
+      matrix:
+        arch: [arm64, x64]
+    runs-on: ${{ matrix.arch == 'arm64' && 'macos-latest' || 'macos-13' }}
+    steps:
+      - name: Check out mcl repository
+        uses: actions/checkout@v4
+        with:
+          repository: herumi/mcl
+
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake .. ${{ matrix.arch == 'arm64' && '-DCMAKE_CXX_COMPILER=clang++' || '' }}
+          make -j$(nproc)
+          strip -x lib/libmcl.dylib
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: osx-${{ matrix.arch }}
+          path: build/lib/libmcl.dylib
+          retention-days: ${{ env.RETENTION }}
+          if-no-files-found: error
+
+  build-windows:
+    name: Windows build
+    strategy:
+      matrix:
+        arch: [x64]
+    runs-on: ${{ matrix.arch == 'arm64' && 'windows-11-arm' || 'windows-latest' }}
+    steps:
+      - name: Check out mcl repository
+        uses: actions/checkout@v4
+        with:
+          repository: herumi/mcl
+
+      - name: Build
+        run: |
+          $ml64Pattern = "${env:ProgramFiles}/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/*/bin/Hostx64/x64/ml64.exe"
+          $ml64Path = Get-ChildItem -Path $ml64Pattern -ErrorAction SilentlyContinue | Sort-Object | Select-Object -Last 1
+
+          if ($ml64Path) {
+            Write-Host "Found MASM: $ml64Path"
+            $env:PATH = "$($ml64Path.Directory.FullName);$env:PATH"
+          }
+
+          cmake -S . -B build -G "Visual Studio 17 2022" -A x64 
+          cmake --build build --config Release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: win-${{ matrix.arch }}
+          path: build/bin/release/mcl.dll
+          retention-days: ${{ env.RETENTION }}
+          if-no-files-found: error
+
+  create-pr:
+    name: Create a pull request
+    needs: [build-linux, build-macos, build-windows]
+    if: github.event.inputs.create-pr == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: src/Nethermind.MclBindings/runtimes
+
+      - name: Move artifacts
+        working-directory: src/Nethermind.MclBindings/runtimes
+        run: |
+          mv -f linux-arm64/libmcl.so linux-arm64/native/libmcl.so
+          mv -f linux-x64/libmcl.so linux-x64/native/libmcl.so
+          mv -f osx-arm64/libmcl.dylib osx-arm64/native/libmcl.dylib
+          mv -f osx-x64/libmcl.dylib osx-x64/native/libmcl.dylib
+          mv -f win-x64/mcl.dll win-x64/native/mcl.dll
+
+      - name: Create a pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          head_branch=feature/mcl-build-$GITHUB_RUN_NUMBER-$GITHUB_RUN_ATTEMPT
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git checkout -b $head_branch
+          git add -A
+          git commit -am "Update MCL binaries"
+          git push origin $head_branch
+          gh pr create -B $GITHUB_REF_NAME -H $head_branch -t "Update MCL binaries" -b "Built and updated MCL binaries"

@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Nethermind.MclBindings.Tests/Nethermind.MclBindings.Tests.csproj" />
+  <Project Path="Nethermind.MclBindings/Nethermind.MclBindings.csproj" />
+</Solution>

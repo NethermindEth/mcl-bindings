@@ -3,6 +3,11 @@ name: Build MCL
 on:
   workflow_dispatch:
     inputs:
+      ref:
+        description: MCL repo ref
+        required: true
+        default: master
+        type: string
       create-pr:
         description: Create a pull request
         default: false
@@ -27,6 +32,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: herumi/mcl
+          ref: ${{ github.event.inputs.ref }}
 
       - name: Build
         run: |
@@ -55,6 +61,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: herumi/mcl
+          ref: ${{ github.event.inputs.ref }}
 
       - name: Build
         run: |
@@ -83,6 +90,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: herumi/mcl
+          ref: ${{ github.event.inputs.ref }}
 
       - name: Build
         run: |

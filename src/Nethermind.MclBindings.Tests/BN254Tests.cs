@@ -3,7 +3,6 @@
 
 namespace Nethermind.MclBindings.Tests;
 
-using Xunit.Internal;
 using static Mcl;
 
 public class BN254Tests

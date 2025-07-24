@@ -42,7 +42,7 @@ jobs:
           classes=("VersionTest" "BN254Tests" "Bls12_381Tests")
 
           for class in "${classes[@]}"; do
-            dotnet run -c $BUILD_CONFIG --no-restore -p:Commit=$GITHUB_SHA -- \
+            dotnet run -c $BUILD_CONFIG --no-restore -p:SourceRevisionId=$GITHUB_SHA -- \
               --filter-class "Nethermind.MclBindings.Tests.$class"
           done
 

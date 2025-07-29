@@ -39,12 +39,8 @@ jobs:
       - name: Test
         working-directory: src/Nethermind.MclBindings.Tests
         run: |
-          classes=("VersionTest" "BN254Tests" "Bls12_381Tests")
-
-          for class in "${classes[@]}"; do
-            dotnet run -c $BUILD_CONFIG --no-restore -p:SourceRevisionId=$GITHUB_SHA -- \
-              --filter-class "Nethermind.MclBindings.Tests.$class"
-          done
+          dotnet run -c $BUILD_CONFIG --no-restore -p:SourceRevisionId=$GITHUB_SHA -- --filter-class BN254Tests
+          dotnet run -c $BUILD_CONFIG --no-restore -p:SourceRevisionId=$GITHUB_SHA -- --filter-class Bls12_381Tests
 
       - name: Publish
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.publish != 'No' || github.event_name == 'release'

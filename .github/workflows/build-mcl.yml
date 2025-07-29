@@ -83,8 +83,8 @@ jobs:
     name: Windows build
     strategy:
       matrix:
-        arch: [x64]
-    runs-on: ${{ matrix.arch == 'arm64' && 'windows-11-arm' || 'windows-latest' }}
+        arch: [arm64, x64]
+    runs-on: windows-latest
     steps:
       - name: Check out mcl repository
         uses: actions/checkout@v4
@@ -93,6 +93,15 @@ jobs:
           ref: ${{ github.event.inputs.ref }}
 
       - name: Build
+        if: matrix.arch == 'arm64'
+        shell: cmd
+        run: |
+          call "%ProgramFiles%/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsamd64_arm64.bat"
+          mklib_arm64 dll
+          ren bin/mclbn.dll bin/mcl.dll
+
+      - name: Build
+        if: matrix.arch == 'x64'
         run: |
           $ml64Pattern = "${env:ProgramFiles}/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/*/bin/Hostx64/x64/ml64.exe"
           $ml64Path = Get-ChildItem -Path $ml64Pattern -ErrorAction SilentlyContinue | Sort-Object | Select-Object -Last 1
@@ -111,7 +120,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: win-${{ matrix.arch }}
-          path: build/bin/release/mcl.dll
+          path: ${{ matrix.arch == 'arm64' && 'bin' || 'build/bin/release' }}/mcl.dll
           retention-days: ${{ env.RETENTION }}
           if-no-files-found: error
 

@@ -75,8 +75,8 @@ jobs:
       - name: Test
         working-directory: src/Nethermind.MclBindings.Tests
         run: |
-          dotnet run -c release --no-restore -- --filter-class "Nethermind.MclBindings.Tests.VersionTest"
-          dotnet run -c release --no-restore -- --filter-class "Nethermind.MclBindings.Tests.BN254Tests"
-          dotnet run -c release --no-restore -- --filter-class "Nethermind.MclBindings.Tests.Bls12_381Tests"
+          dotnet run -c release -- --filter-class "Nethermind.MclBindings.Tests.VersionTest"
+          dotnet run -c release -- --filter-class "Nethermind.MclBindings.Tests.BN254Tests"
+          dotnet run -c release -- --filter-class "Nethermind.MclBindings.Tests.Bls12_381Tests"
           
       

@@ -40,7 +40,7 @@ jobs:
         run: |
           
 
-          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=arm64-windows-toolchain.cmake -DARM64_CROSS=ON
+          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./cmake/arm64-windows-toolchain -DARM64_CROSS=ON
           cmake --build build --config Release
 
       - name: Upload artifact
@@ -53,6 +53,8 @@ jobs:
 
   create-pr:
     name: Create a pull request
+    needs: [build-windows]
+    if: github.event.inputs.create-pr == 'true'
     runs-on: windows-11-arm
     steps:
       - name: Check out repository

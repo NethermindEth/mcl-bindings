@@ -67,7 +67,7 @@ jobs:
       - name: Move artifacts
         working-directory: src/Nethermind.MclBindings/runtimes
         run: |
-          $destDir = "linux-arm64/native"
+          $destDir = "win-arm64/native"
           if (!(Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir }
           
           Move-Item -Force win-arm64/mcl.dll win-arm64/native/mcl.dll

@@ -48,6 +48,11 @@
       <Pack>true</Pack>
       <PackagePath>%(RelativeDir)%(Filename)%(Extension)</PackagePath>
     </None>
+    <None Update="runtimes/win-arm64/native/mcl.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>%(RelativeDir)%(Filename)%(Extension)</PackagePath>
+    </None>
     <None Update="runtimes/win-x64/native/mcl.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>

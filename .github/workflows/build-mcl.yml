@@ -53,8 +53,6 @@ jobs:
 
   create-pr:
     name: Create a pull request
-    needs: [build-linux, build-macos, build-windows]
-    if: github.event.inputs.create-pr == 'true'
     runs-on: windows-11-arm
     steps:
       - name: Check out repository

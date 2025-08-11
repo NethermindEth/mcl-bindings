@@ -34,13 +34,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: herumi/mcl
-          ref: arm64-cross
+          ref: master
 
       - name: Build
         run: |
-          
+          mv CMakeLists.txt CMakeLists.txt.bak
+          mv CMakeLists-arm64.txt CMakeLists.txt
 
-          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE="cmake/arm64-windows-toolchain.cmake" -A arm64
+          cmake -S . -B build -A arm64 -DON_ARM64_WINDOWS=ON
           cmake --build build --config Release
 
       - name: Upload artifact

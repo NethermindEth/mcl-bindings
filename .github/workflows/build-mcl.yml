@@ -38,8 +38,8 @@ jobs:
 
       - name: Build
         run: |
-          # mv CMakeLists.txt CMakeLists.txt.bak
-          # mv CMakeLists-arm64.txt CMakeLists.txt
+          mv CMakeLists.txt CMakeLists.txt.bak
+          mv CMakeLists-arm64.txt CMakeLists.txt
 
           cmake -S . -B build -A arm64 -DON_ARM64_WINDOWS=ON
           cmake --build build --config Release

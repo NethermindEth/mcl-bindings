@@ -41,7 +41,7 @@ jobs:
           # mv CMakeLists.txt CMakeLists.txt.bak
           # mv CMakeLists-arm64.txt CMakeLists.txt
 
-          cmake -S . -B build -DARM64_CROSS=ON
+          cmake -S . -B build -DARM64_CROSS=ON -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_SYSTEM_PROCESSOR=ARM64
           cmake --build build --config Release
 
       - name: Upload artifact

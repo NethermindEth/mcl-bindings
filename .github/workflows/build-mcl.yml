@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: rubo/mcl
-          ref: test/cmake3
+          ref: test/cmake4
 
       - name: Build
         run: |

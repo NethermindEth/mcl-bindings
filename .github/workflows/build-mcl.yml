@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: win-${{ matrix.arch }}
-          path: build/bin/release/mcl.dll
+          path: build/bin/mcl.dll
           retention-days: ${{ env.RETENTION }}
           if-no-files-found: error
 

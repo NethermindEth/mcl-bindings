@@ -41,14 +41,14 @@ jobs:
           # mv CMakeLists.txt CMakeLists.txt.bak
           # mv CMakeLists-arm64.txt CMakeLists.txt
 
-          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE="cmake/arm64-windows-toolchain.cmake" -DARM64_CROSS=ON
+          cmake -S . -B build -G "Visual Studio 17 2022" -A x64
           cmake --build build --config Release
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: win-${{ matrix.arch }}
-          path: build/bin/mcl.dll
+          path: build/bin/release/mcl.dll
           retention-days: ${{ env.RETENTION }}
           if-no-files-found: error
 

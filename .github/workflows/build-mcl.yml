@@ -124,6 +124,7 @@ jobs:
           mv -f linux-x64/libmcl.so linux-x64/native/libmcl.so
           mv -f osx-arm64/libmcl.dylib osx-arm64/native/libmcl.dylib
           mv -f osx-x64/libmcl.dylib osx-x64/native/libmcl.dylib
+          mv -f win-arm64/mcl.dll win-arm64/native/mcl.dll
           mv -f win-x64/mcl.dll win-x64/native/mcl.dll
 
       - name: Create a pull request

@@ -42,7 +42,7 @@ jobs:
 
       - name: Build
         run: |
-          mklib dll
+          ./mklib dll
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

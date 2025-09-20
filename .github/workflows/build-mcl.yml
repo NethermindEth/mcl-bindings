@@ -42,6 +42,7 @@ jobs:
 
       - name: Build
         run: |
+          & "${env:ProgramFiles}/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsx64.bat"
           ./mklib dll
 
       - name: Upload artifact

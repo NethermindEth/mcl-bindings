@@ -24,12 +24,12 @@ jobs:
       - name: Check out mcl repository
         uses: actions/checkout@v5
         with:
-          repository: herumi/mcl
+          repository: rubo/mcl
           ref: ${{ github.event.inputs.ref }}
 
       - name: Build
         run: |
-          cmake -S . -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch }} -DCMAKE_CXX_FLAGS=" -DMCL_USE_XBYAK=0"
+          cmake -S . -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch }} -DCMAKE_CXX_FLAGS=" -DMCL_USE_XBYAK=OFF"
           cmake --build build --config Release
 
       - name: Upload artifact

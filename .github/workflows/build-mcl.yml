@@ -2,7 +2,18 @@ name: Build MCL
 
 on:
   push:
-    branches: [test/build]
+    branches: [test/build]  
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: MCL repo ref
+        required: true
+        default: master
+        type: string
+      create-pr:
+        description: Create a pull request
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -12,7 +23,9 @@ env:
   RETENTION: 7
 
 jobs:
- 
+  
+
+  
 
   build-windows:
     name: Windows build
@@ -24,19 +37,20 @@ jobs:
       - name: Check out mcl repository
         uses: actions/checkout@v5
         with:
-          repository: rubo/mcl
+          repository: herumi/mcl
           ref: ${{ github.event.inputs.ref }}
 
       - name: Build
+        shell: cmd
         run: |
-          
-          cmake -S . -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch }}
-          cmake --build build --config Release
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+          ./mklib dll -DMCL_USE_XBYAK=0
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: win-${{ matrix.arch }}
-          path: build/bin/release/mcl.dll
+          path: .
           retention-days: ${{ env.RETENTION }}
           if-no-files-found: error
+

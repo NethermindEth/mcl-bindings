@@ -29,8 +29,8 @@ jobs:
 
       - name: Build
         run: |
-          $env:CFLAGS="-DMCL_DONT_USE_XBYAK=1"
-          cmake -S . -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch }
+          $env:CFLAGS = " -DMCL_DONT_USE_XBYAK=1"
+          cmake -S . -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch }}
           cmake --build build --config Release
 
       - name: Upload artifact

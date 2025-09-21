@@ -44,7 +44,7 @@ jobs:
         shell: cmd
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
-          ./mklib dll MCL_USE_XBYAK=0
+          ./mklib dll MCL_STATIC_CODE=1
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

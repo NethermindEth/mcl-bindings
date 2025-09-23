@@ -5,6 +5,6 @@ namespace Nethermind.MclBindings.Tests;
 
 public class VersionTest
 {
-    [Fact]
-    public void Should_match_version() => Assert.Equal(0x304, Mcl.mclBn_getVersion());
+    [Test]
+    public async Task Should_match_version() => await Assert.That(Mcl.mclBn_getVersion()).IsEqualTo(0x304);
 }

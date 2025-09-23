@@ -43,7 +43,7 @@ jobs:
 
           for class in "${classes[@]}"; do
             dotnet run -c $BUILD_CONFIG --no-restore -p:SourceRevisionId=$GITHUB_SHA -- \
-              --filter-class "Nethermind.MclBindings.Tests.$class"
+              --treenode-filter "/*/*/$class/*"
           done
 
       - name: Publish

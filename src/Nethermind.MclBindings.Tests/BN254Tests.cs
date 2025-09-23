@@ -13,21 +13,21 @@ public class BN254Tests
             throw new InvalidOperationException("MCL initialization failed");
     }
 
-    [Fact]
-    public void Should_get_curve_type() => Assert.Equal(MCL_BN254, mclBn_getCurveType());
+    [Test]
+    public async Task Should_get_curve_type() => await Assert.That(mclBn_getCurveType()).IsEqualTo(MCL_BN254);
 
-    [Fact]
-    public void Should_get_op_unit_size() => Assert.Equal(4, mclBn_getOpUnitSize());
+    [Test]
+    public async Task Should_get_op_unit_size() => await Assert.That(mclBn_getOpUnitSize()).IsEqualTo(4);
 
-    [Fact]
-    public void Should_get_G1_size() => Assert.Equal(32, mclBn_getG1ByteSize());
+    [Test]
+    public async Task Should_get_G1_size() => await Assert.That(mclBn_getG1ByteSize()).IsEqualTo(32);
 
-    [Fact]
-    public void Should_get_G2_size() => Assert.Equal(64, mclBn_getG2ByteSize());
+    [Test]
+    public async Task Should_get_G2_size() => await Assert.That(mclBn_getG2ByteSize()).IsEqualTo(64);
 
-    [Fact]
-    public void Should_get_Fr_size() => Assert.Equal(32, mclBn_getFrByteSize());
+    [Test]
+    public async Task Should_get_Fr_size() => await Assert.That(mclBn_getFrByteSize()).IsEqualTo(32);
 
-    [Fact]
-    public void Should_get_Fp_size() => Assert.Equal(32, mclBn_getFpByteSize());
+    [Test]
+    public async Task Should_get_Fp_size() => await Assert.That(mclBn_getFpByteSize()).IsEqualTo(32);
 }

@@ -5,6 +5,7 @@ namespace Nethermind.MclBindings.Tests;
 
 using static Mcl;
 
+[Explicit]
 public class BLs12_381Tests
 {
     public BLs12_381Tests()

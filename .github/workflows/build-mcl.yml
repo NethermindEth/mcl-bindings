@@ -36,7 +36,7 @@ jobs:
 
       - name: Build
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DMCL_USE_OMP=ON \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DMCL_USE_OMP=1 \
             ${{ matrix.arch == 'arm64' && '-DCMAKE_CXX_COMPILER=clang++' || '' }}
           cmake --build build
           strip build/lib/libmcl.so

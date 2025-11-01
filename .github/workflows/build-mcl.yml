@@ -21,33 +21,33 @@ env:
   RETENTION: 7
 
 jobs:
-  # build-linux:
-  #   name: Linux build
-  #   strategy:
-  #     matrix:
-  #       arch: [arm64, x64]
-  #   runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-22.04-arm' || 'ubuntu-22.04' }}
-  #   steps:
-  #     - name: Check out mcl repository
-  #       uses: actions/checkout@v5
-  #       with:
-  #         repository: herumi/mcl
-  #         ref: ${{ github.event.inputs.ref }}
+  build-linux:
+    name: Linux build
+    strategy:
+      matrix:
+        arch: [x64]
+    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-22.04-arm' || 'ubuntu-22.04' }}
+    steps:
+      - name: Check out mcl repository
+        uses: actions/checkout@v5
+        with:
+          repository: herumi/mcl
+          ref: ${{ github.event.inputs.ref }}
 
-  #     - name: Build
-  #       run: |
-  #         cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
-  #           ${{ matrix.arch == 'arm64' && '-DCMAKE_CXX_COMPILER=clang++' || '' }}
-  #         cmake --build build
-  #         strip build/lib/libmcl.so
+      - name: Build
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DMCL_USE_OMP=ON \
+            ${{ matrix.arch == 'arm64' && '-DCMAKE_CXX_COMPILER=clang++' || '' }}
+          cmake --build build
+          strip build/lib/libmcl.so
 
-  #     - name: Upload artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: linux-${{ matrix.arch }}
-  #         path: build/lib/libmcl.so
-  #         retention-days: ${{ env.RETENTION }}
-  #         if-no-files-found: error
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-${{ matrix.arch }}
+          path: build/lib/libmcl.so
+          retention-days: ${{ env.RETENTION }}
+          if-no-files-found: error
 
   # build-macos:
   #   name: macOS build

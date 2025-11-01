@@ -92,7 +92,8 @@ jobs:
 
       - name: Build
         run: |
-          cmake -S . -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch }} -DMCL_USE_OMP=ON
+          $env:CFLAGS = "$env:CFLAGS -DMCL_USE_OMP"
+          cmake -S . -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch }}
           cmake --build build --config Release
 
       - name: Upload artifact

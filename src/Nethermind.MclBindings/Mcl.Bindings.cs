@@ -55,21 +55,27 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBn_setMapToMode(int mode);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial nuint mclBnFr_deserialize(ref mclBnFr x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial nuint mclBnG1_deserialize(ref mclBnG1 x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial nuint mclBnG2_deserialize(ref mclBnG2 x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial nuint mclBnGT_deserialize(ref mclBnGT x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial nuint mclBnFp_deserialize(ref mclBnFp x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial nuint mclBnFp2_deserialize(ref mclBnFp2 x, nint buf, nuint bufSize);
 
@@ -142,27 +148,35 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial void mclBnFp_setInt32(ref mclBnFp y, int x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_setLittleEndian(ref mclBnFr x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_setLittleEndian(ref mclBnFp x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial nuint mclBnFr_getLittleEndian(nint buf, nuint maxBufSize, in mclBnFr x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial nuint mclBnFp_getLittleEndian(nint buf, nuint maxBufSize, in mclBnFp x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_setLittleEndianMod(ref mclBnFr x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_setBigEndianMod(ref mclBnFr x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_setLittleEndianMod(ref mclBnFp x, nint buf, nuint bufSize);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_setBigEndianMod(ref mclBnFp x, nint buf, nuint bufSize);
 
@@ -182,12 +196,15 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_isOne(in mclBnFr x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_isOdd(in mclBnFr x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_isNegative(in mclBnFr x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_cmp(in mclBnFr x, in mclBnFr y);
 
@@ -195,6 +212,7 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_isValid(in mclBnFp x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_isEqual(in mclBnFp x, in mclBnFp y);
 
@@ -206,15 +224,19 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_isOne(in mclBnFp x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_isOdd(in mclBnFp x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_isNegative(in mclBnFp x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_cmp(in mclBnFp x, in mclBnFp y);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp2_isEqual(in mclBnFp2 x, in mclBnFp2 y);
 
@@ -338,6 +360,7 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBnG1_isValid(in mclBnG1 x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnG1_isEqual(in mclBnG1 x, in mclBnG1 y);
 
@@ -385,6 +408,7 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBnG2_isValid(in mclBnG2 x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnG2_isEqual(in mclBnG2 x, in mclBnG2 y);
 
@@ -434,6 +458,7 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial void mclBnGT_setInt32(ref mclBnGT y, int x);
 
+    [SuppressGCTransition]
     [LibraryImport(LibraryName)]
     public static partial int mclBnGT_isEqual(in mclBnGT x, in mclBnGT y);
 

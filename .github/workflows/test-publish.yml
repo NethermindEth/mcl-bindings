@@ -46,8 +46,8 @@ jobs:
       - name: Test
         working-directory: src/Nethermind.MclBindings.Tests
         run: |
-          dotnet run -c release --no-restore
-          dotnet run -c release --no-restore -- --treenode-filter "/*/*/Bls12_381Tests/*"
+          dotnet test -c release --no-restore
+          dotnet test -c release --no-restore -- --treenode-filter "/*/*/Bls12_381Tests/*"
 
   publish:
     name: Publish

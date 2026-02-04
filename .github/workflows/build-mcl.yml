@@ -49,7 +49,7 @@ jobs:
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=clang \
             -DCMAKE_CXX_COMPILER=clang++
-          cmake --build build
+          cmake --build build --verbose
           strip build/lib/libmcl.so
 
       - name: Upload artifact
@@ -60,61 +60,7 @@ jobs:
           retention-days: ${{ env.RETENTION }}
           if-no-files-found: error
 
-  build-macos:
-    name: macOS build
-    strategy:
-      matrix:
-        arch: [arm64, x64]
-    runs-on: ${{ matrix.arch == 'arm64' && 'macos-latest' || 'macos-latest-large' }}
-    steps:
-      - name: Check out mcl repository
-        uses: actions/checkout@v5
-        with:
-          repository: herumi/mcl
-          ref: ${{ github.event.inputs.ref }}
-
-      - name: Build
-        run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_C_COMPILER=clang \
-            -DCMAKE_CXX_COMPILER=clang++
-          cmake --build build
-          strip -x build/lib/libmcl.dylib
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: osx-${{ matrix.arch }}
-          path: build/lib/libmcl.dylib
-          retention-days: ${{ env.RETENTION }}
-          if-no-files-found: error
-
-  build-windows:
-    name: Windows build
-    strategy:
-      matrix:
-        arch: [arm64, x64]
-    runs-on: ${{ matrix.arch == 'arm64' && 'windows-11-arm' || 'windows-latest' }}
-    steps:
-      - name: Check out mcl repository
-        uses: actions/checkout@v5
-        with:
-          repository: herumi/mcl
-          ref: ${{ github.event.inputs.ref }}
-
-      - name: Build
-        run: |
-          cmake -S . -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch }}
-          cmake --build build --config Release
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: win-${{ matrix.arch }}
-          path: build/bin/release/mcl.dll
-          retention-days: ${{ env.RETENTION }}
-          if-no-files-found: error
-
+ 
   create-pr:
     name: Create a pull request
     needs: [build-linux, build-macos, build-windows]

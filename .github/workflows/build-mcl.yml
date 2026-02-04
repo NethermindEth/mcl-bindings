@@ -60,40 +60,4 @@ jobs:
           retention-days: ${{ env.RETENTION }}
           if-no-files-found: error
 
- 
-  create-pr:
-    name: Create a pull request
-    needs: [build-linux, build-macos, build-windows]
-    if: github.event.inputs.create-pr == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v5
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: src/Nethermind.MclBindings/runtimes
-
-      - name: Move artifacts
-        working-directory: src/Nethermind.MclBindings/runtimes
-        run: |
-          mv -f linux-arm64/libmcl.so linux-arm64/native/libmcl.so
-          mv -f linux-x64/libmcl.so linux-x64/native/libmcl.so
-          mv -f osx-arm64/libmcl.dylib osx-arm64/native/libmcl.dylib
-          mv -f osx-x64/libmcl.dylib osx-x64/native/libmcl.dylib
-          mv -f win-arm64/mcl.dll win-arm64/native/mcl.dll
-          mv -f win-x64/mcl.dll win-x64/native/mcl.dll
-
-      - name: Create a pull request
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          head_branch=feature/mcl-build-$GITHUB_RUN_NUMBER-$GITHUB_RUN_ATTEMPT
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git checkout -b $head_branch
-          git add -A
-          git commit -am "Update MCL binaries"
-          git push origin $head_branch
-          gh pr create -B $GITHUB_REF_NAME -H $head_branch -t "Update MCL binaries" -b "Built and updated MCL binaries"

@@ -32,7 +32,7 @@ jobs:
       options: --platform ${{ matrix.arch == 'arm64' && 'linux/arm64' || 'linux/amd64' }}
     steps:
       - name: Check out mcl repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: herumi/mcl
           ref: ${{ github.event.inputs.ref }}
@@ -47,8 +47,7 @@ jobs:
       - name: Build
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_C_COMPILER=clang \
-            -DCMAKE_CXX_COMPILER=clang++
+            ${{ matrix.arch == 'arm64' && '-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++' || '' }}
           cmake --build build
           strip build/lib/libmcl.so
 
@@ -65,10 +64,10 @@ jobs:
     strategy:
       matrix:
         arch: [arm64, x64]
-    runs-on: ${{ matrix.arch == 'arm64' && 'macos-latest' || 'macos-latest-large' }}
+    runs-on: ${{ matrix.arch == 'arm64' && 'macos-latest' || 'macos-15-intel' }}
     steps:
       - name: Check out mcl repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: herumi/mcl
           ref: ${{ github.event.inputs.ref }}
@@ -97,7 +96,7 @@ jobs:
     runs-on: ${{ matrix.arch == 'arm64' && 'windows-11-arm' || 'windows-latest' }}
     steps:
       - name: Check out mcl repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: herumi/mcl
           ref: ${{ github.event.inputs.ref }}
@@ -122,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download artifacts
         uses: actions/download-artifact@v4

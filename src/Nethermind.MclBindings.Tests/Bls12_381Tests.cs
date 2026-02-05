@@ -6,9 +6,9 @@ namespace Nethermind.MclBindings.Tests;
 using static Mcl;
 
 [Explicit]
-public class BLs12_381Tests
+public class Bls12_381Tests
 {
-    static BLs12_381Tests()
+    static Bls12_381Tests()
     {
         if (mclBn_init(MCL_BLS12_381, MCLBN_COMPILED_TIME_VAR) != 0)
             throw new InvalidOperationException("MCL initialization failed");

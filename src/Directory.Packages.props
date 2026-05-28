@@ -5,7 +5,7 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.102" />
-    <PackageVersion Include="TUnit" Version="1.12.139" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.300" />
+    <PackageVersion Include="TUnit" Version="1.45.29" />
   </ItemGroup>
 </Project>

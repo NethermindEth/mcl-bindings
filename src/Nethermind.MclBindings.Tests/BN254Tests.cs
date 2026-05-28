@@ -30,4 +30,24 @@ public class BN254Tests
 
     [Test]
     public async Task Should_get_Fp_size() => await Assert.That(mclBn_getFpByteSize()).IsEqualTo(32);
+
+    [Test]
+    public async Task Should_use_span_buffers()
+    {
+        Span<byte> order = stackalloc byte[128];
+        nuint orderSize = mclBn_getCurveOrder(order, (nuint)order.Length);
+
+        mclBnFr value = default;
+        ReadOnlySpan<byte> source = "1"u8;
+        int setResult = mclBnFr_setStr(ref value, source, (nuint)source.Length, 10);
+
+        Span<byte> destination = stackalloc byte[4];
+        nuint written = mclBnFr_getStr(destination, (nuint)destination.Length, in value, 10);
+        byte firstByte = destination[0];
+
+        await Assert.That(orderSize).IsGreaterThan(0u);
+        await Assert.That(setResult).IsZero();
+        await Assert.That(written).IsEqualTo((nuint)1);
+        await Assert.That(firstByte).IsEqualTo((byte)'1');
+    }
 }

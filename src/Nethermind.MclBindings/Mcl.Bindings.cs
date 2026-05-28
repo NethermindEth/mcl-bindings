@@ -41,10 +41,10 @@ public static partial class Mcl
     public static partial int mclBn_getFpByteSize();
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBn_getCurveOrder(nint buf, nuint maxBufSize);
+    public static partial nuint mclBn_getCurveOrder(Span<byte> buf, nuint maxBufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBn_getFieldOrder(nint buf, nuint maxBufSize);
+    public static partial nuint mclBn_getFieldOrder(Span<byte> buf, nuint maxBufSize);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBn_setETHserialization(int enable);
@@ -56,70 +56,70 @@ public static partial class Mcl
     public static partial int mclBn_setMapToMode(int mode);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_deserialize(ref mclBnFr x, nint buf, nuint bufSize);
+    public static partial nuint mclBnFr_deserialize(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG1_deserialize(ref mclBnG1 x, nint buf, nuint bufSize);
+    public static partial nuint mclBnG1_deserialize(ref mclBnG1 x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG2_deserialize(ref mclBnG2 x, nint buf, nuint bufSize);
+    public static partial nuint mclBnG2_deserialize(ref mclBnG2 x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnGT_deserialize(ref mclBnGT x, nint buf, nuint bufSize);
+    public static partial nuint mclBnGT_deserialize(ref mclBnGT x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_deserialize(ref mclBnFp x, nint buf, nuint bufSize);
+    public static partial nuint mclBnFp_deserialize(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp2_deserialize(ref mclBnFp2 x, nint buf, nuint bufSize);
+    public static partial nuint mclBnFp2_deserialize(ref mclBnFp2 x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_serialize(nint buf, nuint maxBufSize, in mclBnFr x);
+    public static partial nuint mclBnFr_serialize(Span<byte> buf, nuint maxBufSize, in mclBnFr x);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG1_serialize(nint buf, nuint maxBufSize, in mclBnG1 x);
+    public static partial nuint mclBnG1_serialize(Span<byte> buf, nuint maxBufSize, in mclBnG1 x);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG2_serialize(nint buf, nuint maxBufSize, in mclBnG2 x);
+    public static partial nuint mclBnG2_serialize(Span<byte> buf, nuint maxBufSize, in mclBnG2 x);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnGT_serialize(nint buf, nuint maxBufSize, in mclBnGT x);
+    public static partial nuint mclBnGT_serialize(Span<byte> buf, nuint maxBufSize, in mclBnGT x);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_serialize(nint buf, nuint maxBufSize, in mclBnFp x);
+    public static partial nuint mclBnFp_serialize(Span<byte> buf, nuint maxBufSize, in mclBnFp x);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp2_serialize(nint buf, nuint maxBufSize, in mclBnFp2 x);
+    public static partial nuint mclBnFp2_serialize(Span<byte> buf, nuint maxBufSize, in mclBnFp2 x);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setStr(ref mclBnFr x, nint buf, nuint bufSize, int ioMode);
+    public static partial int mclBnFr_setStr(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG1_setStr(ref mclBnG1 x, nint buf, nuint bufSize, int ioMode);
+    public static partial int mclBnG1_setStr(ref mclBnG1 x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG2_setStr(ref mclBnG2 x, nint buf, nuint bufSize, int ioMode);
+    public static partial int mclBnG2_setStr(ref mclBnG2 x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnGT_setStr(ref mclBnGT x, nint buf, nuint bufSize, int ioMode);
+    public static partial int mclBnGT_setStr(ref mclBnGT x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setStr(ref mclBnFp x, nint buf, nuint bufSize, int ioMode);
+    public static partial int mclBnFp_setStr(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_getStr(nint buf, nuint maxBufSize, in mclBnFr x, int ioMode);
+    public static partial nuint mclBnFr_getStr(Span<byte> buf, nuint maxBufSize, in mclBnFr x, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG1_getStr(nint buf, nuint maxBufSize, in mclBnG1 x, int ioMode);
+    public static partial nuint mclBnG1_getStr(Span<byte> buf, nuint maxBufSize, in mclBnG1 x, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG2_getStr(nint buf, nuint maxBufSize, in mclBnG2 x, int ioMode);
+    public static partial nuint mclBnG2_getStr(Span<byte> buf, nuint maxBufSize, in mclBnG2 x, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnGT_getStr(nint buf, nuint maxBufSize, in mclBnGT x, int ioMode);
+    public static partial nuint mclBnGT_getStr(Span<byte> buf, nuint maxBufSize, in mclBnGT x, int ioMode);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_getStr(nint buf, nuint maxBufSize, in mclBnFp x, int ioMode);
+    public static partial nuint mclBnFp_getStr(Span<byte> buf, nuint maxBufSize, in mclBnFp x, int ioMode);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnFr_clear(ref mclBnFr x);
@@ -143,28 +143,28 @@ public static partial class Mcl
     public static partial void mclBnFp_setInt32(ref mclBnFp y, int x);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setLittleEndian(ref mclBnFr x, nint buf, nuint bufSize);
+    public static partial int mclBnFr_setLittleEndian(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setLittleEndian(ref mclBnFp x, nint buf, nuint bufSize);
+    public static partial int mclBnFp_setLittleEndian(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_getLittleEndian(nint buf, nuint maxBufSize, in mclBnFr x);
+    public static partial nuint mclBnFr_getLittleEndian(Span<byte> buf, nuint maxBufSize, in mclBnFr x);
 
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_getLittleEndian(nint buf, nuint maxBufSize, in mclBnFp x);
+    public static partial nuint mclBnFp_getLittleEndian(Span<byte> buf, nuint maxBufSize, in mclBnFp x);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setLittleEndianMod(ref mclBnFr x, nint buf, nuint bufSize);
+    public static partial int mclBnFr_setLittleEndianMod(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setBigEndianMod(ref mclBnFr x, nint buf, nuint bufSize);
+    public static partial int mclBnFr_setBigEndianMod(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setLittleEndianMod(ref mclBnFp x, nint buf, nuint bufSize);
+    public static partial int mclBnFp_setLittleEndianMod(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setBigEndianMod(ref mclBnFp x, nint buf, nuint bufSize);
+    public static partial int mclBnFp_setBigEndianMod(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_isValid(in mclBnFr x);
@@ -224,13 +224,13 @@ public static partial class Mcl
     public static partial int mclBnFp_setByCSPRNG(ref mclBnFp x);
 
     [LibraryImport(LibraryName)]
-    public static unsafe partial void mclBn_setRandFunc(nint self, delegate* unmanaged[Cdecl]<nint, nint, nuint, int> readFunc);
+    public static unsafe partial void mclBn_setRandFunc(void* self, delegate* unmanaged[Cdecl]<void*, byte*, uint, uint> readFunc);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setHashOf(ref mclBnFr x, nint buf, nuint bufSize);
+    public static partial int mclBnFr_setHashOf(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setHashOf(ref mclBnFp x, nint buf, nuint bufSize);
+    public static partial int mclBnFp_setHashOf(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_mapToG1(ref mclBnG1 y, in mclBnFp x);
@@ -317,10 +317,10 @@ public static partial class Mcl
     public static partial void mclBnFp_pow(ref mclBnFp z, in mclBnFp x, in mclBnFp y);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_powArray(ref mclBnFr z, in mclBnFr x, nint y, nuint ySize);
+    public static partial int mclBnFr_powArray(ref mclBnFr z, in mclBnFr x, ReadOnlySpan<byte> y, nuint ySize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_powArray(ref mclBnFp z, in mclBnFp x, nint y, nuint ySize);
+    public static partial int mclBnFp_powArray(ref mclBnFp z, in mclBnFp x, ReadOnlySpan<byte> y, nuint ySize);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnG1_clear(ref mclBnG1 x);
@@ -338,13 +338,13 @@ public static partial class Mcl
     public static partial int mclBnG1_isValidOrder(in mclBnG1 x);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG1_hashAndMapTo(ref mclBnG1 x, nint buf, nuint bufSize);
+    public static partial int mclBnG1_hashAndMapTo(ref mclBnG1 x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG1_hashAndMapToWithDst(ref mclBnG1 x, nint buf, nuint bufSize, nint dst, nuint dstSize);
+    public static partial int mclBnG1_hashAndMapToWithDst(ref mclBnG1 x, ReadOnlySpan<byte> buf, nuint bufSize, ReadOnlySpan<byte> dst, nuint dstSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG1_setDst(nint dst, nuint dstSize);
+    public static partial int mclBnG1_setDst(ReadOnlySpan<byte> dst, nuint dstSize);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnG1_neg(ref mclBnG1 y, in mclBnG1 x);
@@ -383,13 +383,13 @@ public static partial class Mcl
     public static partial int mclBnG2_isValidOrder(in mclBnG2 x);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG2_hashAndMapTo(ref mclBnG2 x, nint buf, nuint bufSize);
+    public static partial int mclBnG2_hashAndMapTo(ref mclBnG2 x, ReadOnlySpan<byte> buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG2_hashAndMapToWithDst(ref mclBnG2 x, nint buf, nuint bufSize, nint dst, nuint dstSize);
+    public static partial int mclBnG2_hashAndMapToWithDst(ref mclBnG2 x, ReadOnlySpan<byte> buf, nuint bufSize, ReadOnlySpan<byte> dst, nuint dstSize);
 
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG2_setDst(nint dst, nuint dstSize);
+    public static partial int mclBnG2_setDst(ReadOnlySpan<byte> dst, nuint dstSize);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnG2_neg(ref mclBnG2 y, in mclBnG2 x);
@@ -512,16 +512,16 @@ public static partial class Mcl
     public static partial int mclBn_getUint64NumToPrecompute();
 
     [LibraryImport(LibraryName)]
-    public static partial void mclBn_precomputeG2(nint Qbuf, in mclBnG2 Q);
+    public static unsafe partial void mclBn_precomputeG2(ulong* Qbuf, in mclBnG2 Q);
 
     [LibraryImport(LibraryName)]
-    public static partial void mclBn_precomputedMillerLoop(ref mclBnGT f, in mclBnG1 P, nint Qbuf);
+    public static unsafe partial void mclBn_precomputedMillerLoop(ref mclBnGT f, in mclBnG1 P, ulong* Qbuf);
 
     [LibraryImport(LibraryName)]
-    public static partial void mclBn_precomputedMillerLoop2(ref mclBnGT f, in mclBnG1 P1, nint Q1buf, in mclBnG1 P2, nint Q2buf);
+    public static unsafe partial void mclBn_precomputedMillerLoop2(ref mclBnGT f, in mclBnG1 P1, ulong* Q1buf, in mclBnG1 P2, ulong* Q2buf);
 
     [LibraryImport(LibraryName)]
-    public static partial void mclBn_precomputedMillerLoop2mixed(ref mclBnGT f, in mclBnG1 P1, in mclBnG2 Q1, in mclBnG1 P2, nint Q2buf);
+    public static unsafe partial void mclBn_precomputedMillerLoop2mixed(ref mclBnGT f, in mclBnG1 P1, in mclBnG2 Q1, in mclBnG1 P2, ulong* Q2buf);
 
     [LibraryImport(LibraryName)]
     public static partial int mclBn_FrLagrangeInterpolation(ref mclBnFr @out, in mclBnFr xVec, in mclBnFr yVec, nuint k);

@@ -38,7 +38,7 @@ public class BN254Tests
         nuint orderSize = mclBn_getCurveOrder(order, (nuint)order.Length);
 
         mclBnFr value = default;
-        ReadOnlySpan<byte> source = "1"u8;
+        var source = "1"u8;
         int setResult = mclBnFr_setStr(ref value, source, (nuint)source.Length, 10);
 
         Span<byte> destination = stackalloc byte[4];

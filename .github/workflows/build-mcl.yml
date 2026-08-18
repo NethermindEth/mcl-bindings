@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: herumi/mcl
-          ref: ${{ github.event.inputs.ref }}
+          ref: ${{ inputs.ref }}
 
       - name: Install dependencies
         env:
@@ -70,7 +70,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: herumi/mcl
-          ref: ${{ github.event.inputs.ref }}
+          ref: ${{ inputs.ref }}
 
       - name: Build
         run: |
@@ -99,7 +99,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: herumi/mcl
-          ref: ${{ github.event.inputs.ref }}
+          ref: ${{ inputs.ref }}
 
       - name: Build
         run: |
@@ -110,14 +110,14 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: win-${{ matrix.arch }}
-          path: build/bin/release/mcl.dll
+          path: ${{ matrix.arch == 'arm64' && 'build/bin/mcl.dll' || 'build/bin/release/mcl.dll' }}
           retention-days: ${{ env.RETENTION }}
           if-no-files-found: error
 
   create-pr:
     name: Create a pull request
     needs: [build-linux, build-macos, build-windows]
-    if: github.event.inputs.create-pr == 'true'
+    if: inputs.create-pr
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

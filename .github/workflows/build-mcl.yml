@@ -32,7 +32,7 @@ jobs:
       options: --platform ${{ matrix.arch == 'arm64' && 'linux/arm64' || 'linux/amd64' }}
     steps:
       - name: Check out mcl repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: herumi/mcl
           ref: ${{ github.event.inputs.ref }}
@@ -52,7 +52,7 @@ jobs:
           strip build/lib/libmcl.so
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: linux-${{ matrix.arch }}
           path: build/lib/libmcl.so
@@ -67,7 +67,7 @@ jobs:
     runs-on: ${{ matrix.arch == 'arm64' && 'macos-latest' || 'macos-15-intel' }}
     steps:
       - name: Check out mcl repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: herumi/mcl
           ref: ${{ github.event.inputs.ref }}
@@ -81,7 +81,7 @@ jobs:
           strip -x build/lib/libmcl.dylib
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: osx-${{ matrix.arch }}
           path: build/lib/libmcl.dylib
@@ -96,7 +96,7 @@ jobs:
     runs-on: ${{ matrix.arch == 'arm64' && 'windows-11-arm' || 'windows-2022' }}
     steps:
       - name: Check out mcl repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: herumi/mcl
           ref: ${{ github.event.inputs.ref }}
@@ -107,7 +107,7 @@ jobs:
           cmake --build build --config Release
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: win-${{ matrix.arch }}
           path: build/bin/release/mcl.dll
@@ -121,10 +121,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: src/Nethermind.MclBindings/runtimes
 
@@ -141,12 +141,14 @@ jobs:
       - name: Create a pull request
         env:
           GH_TOKEN: ${{ github.token }}
+          REF: ${{ inputs.ref }}
         run: |
           head_branch=feature/mcl-build-$GITHUB_RUN_NUMBER-$GITHUB_RUN_ATTEMPT
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          title="chore(deps): update MCL binaries to ${REF#v}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b $head_branch
           git add -A
           git commit -am "Update MCL binaries"
           git push origin $head_branch
-          gh pr create -B $GITHUB_REF_NAME -H $head_branch -t "Update MCL binaries" -b "Built and updated MCL binaries"
+          gh pr create -B $GITHUB_REF_NAME -H $head_branch -t "$title" -b "Built from MCL $REF."

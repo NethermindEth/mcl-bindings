@@ -40,11 +40,17 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBn_getFpByteSize();
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBn_getCurveOrder(Span<byte> buf, nuint maxBufSize);
+    public static unsafe partial nuint mclBn_getCurveOrder(byte* buf, nuint maxBufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBn_getFieldOrder(Span<byte> buf, nuint maxBufSize);
+    public static unsafe partial nuint mclBn_getFieldOrder(byte* buf, nuint maxBufSize);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBn_setETHserialization(int enable);
@@ -55,71 +61,137 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBn_setMapToMode(int mode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_deserialize(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial nuint mclBnFr_deserialize(ref mclBnFr x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG1_deserialize(ref mclBnG1 x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial nuint mclBnG1_deserialize(ref mclBnG1 x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG2_deserialize(ref mclBnG2 x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial nuint mclBnG2_deserialize(ref mclBnG2 x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnGT_deserialize(ref mclBnGT x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial nuint mclBnGT_deserialize(ref mclBnGT x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_deserialize(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial nuint mclBnFp_deserialize(ref mclBnFp x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp2_deserialize(ref mclBnFp2 x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial nuint mclBnFp2_deserialize(ref mclBnFp2 x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_serialize(Span<byte> buf, nuint maxBufSize, in mclBnFr x);
+    public static unsafe partial nuint mclBnFr_serialize(void* buf, nuint maxBufSize, in mclBnFr x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG1_serialize(Span<byte> buf, nuint maxBufSize, in mclBnG1 x);
+    public static unsafe partial nuint mclBnG1_serialize(void* buf, nuint maxBufSize, in mclBnG1 x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG2_serialize(Span<byte> buf, nuint maxBufSize, in mclBnG2 x);
+    public static unsafe partial nuint mclBnG2_serialize(void* buf, nuint maxBufSize, in mclBnG2 x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnGT_serialize(Span<byte> buf, nuint maxBufSize, in mclBnGT x);
+    public static unsafe partial nuint mclBnGT_serialize(void* buf, nuint maxBufSize, in mclBnGT x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_serialize(Span<byte> buf, nuint maxBufSize, in mclBnFp x);
+    public static unsafe partial nuint mclBnFp_serialize(void* buf, nuint maxBufSize, in mclBnFp x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp2_serialize(Span<byte> buf, nuint maxBufSize, in mclBnFp2 x);
+    public static unsafe partial nuint mclBnFp2_serialize(void* buf, nuint maxBufSize, in mclBnFp2 x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setStr(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
+    public static unsafe partial int mclBnFr_setStr(ref mclBnFr x, byte* buf, nuint bufSize, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG1_setStr(ref mclBnG1 x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
+    public static unsafe partial int mclBnG1_setStr(ref mclBnG1 x, byte* buf, nuint bufSize, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG2_setStr(ref mclBnG2 x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
+    public static unsafe partial int mclBnG2_setStr(ref mclBnG2 x, byte* buf, nuint bufSize, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnGT_setStr(ref mclBnGT x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
+    public static unsafe partial int mclBnGT_setStr(ref mclBnGT x, byte* buf, nuint bufSize, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setStr(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize, int ioMode);
+    public static unsafe partial int mclBnFp_setStr(ref mclBnFp x, byte* buf, nuint bufSize, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_getStr(Span<byte> buf, nuint maxBufSize, in mclBnFr x, int ioMode);
+    public static unsafe partial nuint mclBnFr_getStr(byte* buf, nuint maxBufSize, in mclBnFr x, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG1_getStr(Span<byte> buf, nuint maxBufSize, in mclBnG1 x, int ioMode);
+    public static unsafe partial nuint mclBnG1_getStr(byte* buf, nuint maxBufSize, in mclBnG1 x, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnG2_getStr(Span<byte> buf, nuint maxBufSize, in mclBnG2 x, int ioMode);
+    public static unsafe partial nuint mclBnG2_getStr(byte* buf, nuint maxBufSize, in mclBnG2 x, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnGT_getStr(Span<byte> buf, nuint maxBufSize, in mclBnGT x, int ioMode);
+    public static unsafe partial nuint mclBnGT_getStr(byte* buf, nuint maxBufSize, in mclBnGT x, int ioMode);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_getStr(Span<byte> buf, nuint maxBufSize, in mclBnFp x, int ioMode);
+    public static unsafe partial nuint mclBnFp_getStr(byte* buf, nuint maxBufSize, in mclBnFp x, int ioMode);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnFr_clear(ref mclBnFr x);
@@ -131,40 +203,64 @@ public static partial class Mcl
     public static partial void mclBnFp2_clear(ref mclBnFp2 x);
 
     [LibraryImport(LibraryName)]
-    public static partial void mclBnFr_setInt(ref mclBnFr y, nuint x);
+    public static partial void mclBnFr_setInt(ref mclBnFr y, long x);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnFr_setInt32(ref mclBnFr y, int x);
 
     [LibraryImport(LibraryName)]
-    public static partial void mclBnFp_setInt(ref mclBnFp y, nuint x);
+    public static partial void mclBnFp_setInt(ref mclBnFp y, long x);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnFp_setInt32(ref mclBnFp y, int x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setLittleEndian(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnFr_setLittleEndian(ref mclBnFr x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setLittleEndian(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnFp_setLittleEndian(ref mclBnFp x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_getLittleEndian(Span<byte> buf, nuint maxBufSize, in mclBnFr x);
+    public static unsafe partial nuint mclBnFr_getLittleEndian(void* buf, nuint maxBufSize, in mclBnFr x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="maxBufSize"/> writable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_getLittleEndian(Span<byte> buf, nuint maxBufSize, in mclBnFp x);
+    public static unsafe partial nuint mclBnFp_getLittleEndian(void* buf, nuint maxBufSize, in mclBnFp x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setLittleEndianMod(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnFr_setLittleEndianMod(ref mclBnFr x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setBigEndianMod(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnFr_setBigEndianMod(ref mclBnFr x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setLittleEndianMod(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnFp_setLittleEndianMod(ref mclBnFp x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setBigEndianMod(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnFp_setBigEndianMod(ref mclBnFp x, void* buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
     public static partial int mclBnFr_isValid(in mclBnFr x);
@@ -223,14 +319,24 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_setByCSPRNG(ref mclBnFp x);
 
+    /// <safety>
+    /// <paramref name="readFunc"/> must write at most <c>bufSize</c> bytes to <c>buf</c>, and <paramref name="self"/> must remain valid while the function is registered.
+    /// Must not be called concurrently with <see cref="mclBnFr_setByCSPRNG"/> or <see cref="mclBnFp_setByCSPRNG"/>.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static unsafe partial void mclBn_setRandFunc(void* self, delegate* unmanaged[Cdecl]<void*, byte*, uint, uint> readFunc);
+    public static unsafe partial void mclBn_setRandFunc(void* self, delegate* unmanaged[Cdecl]<void*, void*, uint, uint> readFunc);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_setHashOf(ref mclBnFr x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnFr_setHashOf(ref mclBnFr x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_setHashOf(ref mclBnFp x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnFp_setHashOf(ref mclBnFp x, void* buf, nuint bufSize);
 
     [LibraryImport(LibraryName)]
     public static partial int mclBnFp_mapToG1(ref mclBnG1 y, in mclBnFp x);
@@ -316,11 +422,17 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial void mclBnFp_pow(ref mclBnFp z, in mclBnFp x, in mclBnFp y);
 
+    /// <safety>
+    /// <paramref name="y"/> must point to at least <paramref name="ySize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFr_powArray(ref mclBnFr z, in mclBnFr x, ReadOnlySpan<byte> y, nuint ySize);
+    public static unsafe partial int mclBnFr_powArray(ref mclBnFr z, in mclBnFr x, byte* y, nuint ySize);
 
+    /// <safety>
+    /// <paramref name="y"/> must point to at least <paramref name="ySize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnFp_powArray(ref mclBnFp z, in mclBnFp x, ReadOnlySpan<byte> y, nuint ySize);
+    public static unsafe partial int mclBnFp_powArray(ref mclBnFp z, in mclBnFp x, byte* y, nuint ySize);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnG1_clear(ref mclBnG1 x);
@@ -337,14 +449,24 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBnG1_isValidOrder(in mclBnG1 x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG1_hashAndMapTo(ref mclBnG1 x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnG1_hashAndMapTo(ref mclBnG1 x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// <paramref name="dst"/> must point to at least <paramref name="dstSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG1_hashAndMapToWithDst(ref mclBnG1 x, ReadOnlySpan<byte> buf, nuint bufSize, ReadOnlySpan<byte> dst, nuint dstSize);
+    public static unsafe partial int mclBnG1_hashAndMapToWithDst(ref mclBnG1 x, void* buf, nuint bufSize, byte* dst, nuint dstSize);
 
+    /// <safety>
+    /// <paramref name="dst"/> must point to at least <paramref name="dstSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG1_setDst(ReadOnlySpan<byte> dst, nuint dstSize);
+    public static unsafe partial int mclBnG1_setDst(byte* dst, nuint dstSize);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnG1_neg(ref mclBnG1 y, in mclBnG1 x);
@@ -382,14 +504,24 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial int mclBnG2_isValidOrder(in mclBnG2 x);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG2_hashAndMapTo(ref mclBnG2 x, ReadOnlySpan<byte> buf, nuint bufSize);
+    public static unsafe partial int mclBnG2_hashAndMapTo(ref mclBnG2 x, void* buf, nuint bufSize);
 
+    /// <safety>
+    /// <paramref name="buf"/> must point to at least <paramref name="bufSize"/> readable bytes.
+    /// <paramref name="dst"/> must point to at least <paramref name="dstSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG2_hashAndMapToWithDst(ref mclBnG2 x, ReadOnlySpan<byte> buf, nuint bufSize, ReadOnlySpan<byte> dst, nuint dstSize);
+    public static unsafe partial int mclBnG2_hashAndMapToWithDst(ref mclBnG2 x, void* buf, nuint bufSize, byte* dst, nuint dstSize);
 
+    /// <safety>
+    /// <paramref name="dst"/> must point to at least <paramref name="dstSize"/> readable bytes.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBnG2_setDst(ReadOnlySpan<byte> dst, nuint dstSize);
+    public static unsafe partial int mclBnG2_setDst(byte* dst, nuint dstSize);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnG2_neg(ref mclBnG2 y, in mclBnG2 x);
@@ -416,7 +548,7 @@ public static partial class Mcl
     public static partial void mclBnGT_clear(ref mclBnGT x);
 
     [LibraryImport(LibraryName)]
-    public static partial void mclBnGT_setInt(ref mclBnGT y, nuint x);
+    public static partial void mclBnGT_setInt(ref mclBnGT y, long x);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnGT_setInt32(ref mclBnGT y, int x);
@@ -463,29 +595,61 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial void mclBnGT_pow(ref mclBnGT z, in mclBnGT x, in mclBnFr y);
 
+    /// <safety>
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable and writable elements.
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBnG1_mulVec(ref mclBnG1 z, ref mclBnG1 x, in mclBnFr y, nuint n);
+    public static unsafe partial void mclBnG1_mulVec(ref mclBnG1 z, mclBnG1* x, mclBnFr* y, nuint n);
 
+    /// <safety>
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable and writable elements.
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBnG2_mulVec(ref mclBnG2 z, ref mclBnG2 x, in mclBnFr y, nuint n);
+    public static unsafe partial void mclBnG2_mulVec(ref mclBnG2 z, mclBnG2* x, mclBnFr* y, nuint n);
 
+    /// <safety>
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable elements.
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBnGT_powVec(ref mclBnGT z, in mclBnGT x, in mclBnFr y, nuint n);
+    public static unsafe partial void mclBnGT_powVec(ref mclBnGT z, mclBnGT* x, mclBnFr* y, nuint n);
 
+    /// <safety>
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable and writable elements.
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBnG1_mulEach(ref mclBnG1 x, in mclBnFr y, nuint n);
+    public static unsafe partial void mclBnG1_mulEach(mclBnG1* x, mclBnFr* y, nuint n);
 
+    /// <safety>
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> writable elements.
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFr_invVec(ref mclBnFr y, in mclBnFr x, nuint n);
+    public static unsafe partial nuint mclBnFr_invVec(mclBnFr* y, mclBnFr* x, nuint n);
 
+    /// <safety>
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> writable elements.
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial nuint mclBnFp_invVec(ref mclBnFp y, in mclBnFp x, nuint n);
+    public static unsafe partial nuint mclBnFp_invVec(mclBnFp* y, mclBnFp* x, nuint n);
 
+    /// <safety>
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> writable elements.
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBnG1_normalizeVec(ref mclBnG1 y, in mclBnG1 x, nuint n);
+    public static unsafe partial void mclBnG1_normalizeVec(mclBnG1* y, mclBnG1* x, nuint n);
 
+    /// <safety>
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> writable elements.
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBnG2_normalizeVec(ref mclBnG2 y, in mclBnG2 x, nuint n);
+    public static unsafe partial void mclBnG2_normalizeVec(mclBnG2* y, mclBnG2* x, nuint n);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBn_pairing(ref mclBnGT z, in mclBnG1 x, in mclBnG2 y);
@@ -496,50 +660,100 @@ public static partial class Mcl
     [LibraryImport(LibraryName)]
     public static partial void mclBn_millerLoop(ref mclBnGT z, in mclBnG1 x, in mclBnG2 y);
 
+    /// <safety>
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable elements.
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBn_millerLoopVec(ref mclBnGT z, in mclBnG1 x, in mclBnG2 y, nuint n);
+    public static unsafe partial void mclBn_millerLoopVec(ref mclBnGT z, mclBnG1* x, mclBnG2* y, nuint n);
 
+    /// <safety>
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable elements.
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBn_millerLoopVecMT(ref mclBnGT z, in mclBnG1 x, in mclBnG2 y, nuint n, nuint cpuN);
+    public static unsafe partial void mclBn_millerLoopVecMT(ref mclBnGT z, mclBnG1* x, mclBnG2* y, nuint n, nuint cpuN);
 
+    /// <safety>
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable and writable elements.
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBnG1_mulVecMT(ref mclBnG1 z, ref mclBnG1 x, in mclBnFr y, nuint n, nuint cpuN);
+    public static unsafe partial void mclBnG1_mulVecMT(ref mclBnG1 z, mclBnG1* x, mclBnFr* y, nuint n, nuint cpuN);
 
+    /// <safety>
+    /// <paramref name="x"/> must point to at least <paramref name="n"/> readable and writable elements.
+    /// <paramref name="y"/> must point to at least <paramref name="n"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial void mclBnG2_mulVecMT(ref mclBnG2 z, ref mclBnG2 x, in mclBnFr y, nuint n, nuint cpuN);
+    public static unsafe partial void mclBnG2_mulVecMT(ref mclBnG2 z, mclBnG2* x, mclBnFr* y, nuint n, nuint cpuN);
 
     [LibraryImport(LibraryName)]
     public static partial int mclBn_getUint64NumToPrecompute();
 
+    /// <safety>
+    /// <paramref name="Qbuf"/> must point to at least <see cref="mclBn_getUint64NumToPrecompute"/> writable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
     public static unsafe partial void mclBn_precomputeG2(ulong* Qbuf, in mclBnG2 Q);
 
+    /// <safety>
+    /// <paramref name="Qbuf"/> must point to at least <see cref="mclBn_getUint64NumToPrecompute"/> readable elements initialized by <see cref="mclBn_precomputeG2"/>.
+    /// </safety>
     [LibraryImport(LibraryName)]
     public static unsafe partial void mclBn_precomputedMillerLoop(ref mclBnGT f, in mclBnG1 P, ulong* Qbuf);
 
+    /// <safety>
+    /// <paramref name="Q1buf"/> must point to at least <see cref="mclBn_getUint64NumToPrecompute"/> readable elements initialized by <see cref="mclBn_precomputeG2"/>.
+    /// <paramref name="Q2buf"/> must point to at least <see cref="mclBn_getUint64NumToPrecompute"/> readable elements initialized by <see cref="mclBn_precomputeG2"/>.
+    /// </safety>
     [LibraryImport(LibraryName)]
     public static unsafe partial void mclBn_precomputedMillerLoop2(ref mclBnGT f, in mclBnG1 P1, ulong* Q1buf, in mclBnG1 P2, ulong* Q2buf);
 
+    /// <safety>
+    /// <paramref name="Q2buf"/> must point to at least <see cref="mclBn_getUint64NumToPrecompute"/> readable elements initialized by <see cref="mclBn_precomputeG2"/>.
+    /// </safety>
     [LibraryImport(LibraryName)]
     public static unsafe partial void mclBn_precomputedMillerLoop2mixed(ref mclBnGT f, in mclBnG1 P1, in mclBnG2 Q1, in mclBnG1 P2, ulong* Q2buf);
 
+    /// <safety>
+    /// <paramref name="xVec"/> must point to at least <paramref name="k"/> readable elements.
+    /// <paramref name="yVec"/> must point to at least <paramref name="k"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBn_FrLagrangeInterpolation(ref mclBnFr @out, in mclBnFr xVec, in mclBnFr yVec, nuint k);
+    public static unsafe partial int mclBn_FrLagrangeInterpolation(ref mclBnFr @out, mclBnFr* xVec, mclBnFr* yVec, nuint k);
 
+    /// <safety>
+    /// <paramref name="xVec"/> must point to at least <paramref name="k"/> readable elements.
+    /// <paramref name="yVec"/> must point to at least <paramref name="k"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBn_G1LagrangeInterpolation(ref mclBnG1 @out, in mclBnFr xVec, in mclBnG1 yVec, nuint k);
+    public static unsafe partial int mclBn_G1LagrangeInterpolation(ref mclBnG1 @out, mclBnFr* xVec, mclBnG1* yVec, nuint k);
 
+    /// <safety>
+    /// <paramref name="xVec"/> must point to at least <paramref name="k"/> readable elements.
+    /// <paramref name="yVec"/> must point to at least <paramref name="k"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBn_G2LagrangeInterpolation(ref mclBnG2 @out, in mclBnFr xVec, in mclBnG2 yVec, nuint k);
+    public static unsafe partial int mclBn_G2LagrangeInterpolation(ref mclBnG2 @out, mclBnFr* xVec, mclBnG2* yVec, nuint k);
 
+    /// <safety>
+    /// <paramref name="cVec"/> must point to at least <paramref name="cSize"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBn_FrEvaluatePolynomial(ref mclBnFr @out, in mclBnFr cVec, nuint cSize, in mclBnFr x);
+    public static unsafe partial int mclBn_FrEvaluatePolynomial(ref mclBnFr @out, mclBnFr* cVec, nuint cSize, in mclBnFr x);
 
+    /// <safety>
+    /// <paramref name="cVec"/> must point to at least <paramref name="cSize"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBn_G1EvaluatePolynomial(ref mclBnG1 @out, in mclBnG1 cVec, nuint cSize, in mclBnFr x);
+    public static unsafe partial int mclBn_G1EvaluatePolynomial(ref mclBnG1 @out, mclBnG1* cVec, nuint cSize, in mclBnFr x);
 
+    /// <safety>
+    /// <paramref name="cVec"/> must point to at least <paramref name="cSize"/> readable elements.
+    /// </safety>
     [LibraryImport(LibraryName)]
-    public static partial int mclBn_G2EvaluatePolynomial(ref mclBnG2 @out, in mclBnG2 cVec, nuint cSize, in mclBnFr x);
+    public static unsafe partial int mclBn_G2EvaluatePolynomial(ref mclBnG2 @out, mclBnG2* cVec, nuint cSize, in mclBnFr x);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBn_verifyOrderG1(int doVerify);

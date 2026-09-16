@@ -17,6 +17,7 @@ C# bindings for MCL. See [global.json](./global.json) and [src](./src/) director
 - Use conventional commits; keep scoped and imperative.
 - Keep the native binaries under `src/Nethermind.MclBindings/runtimes/` in sync with a single MCL version; they are Git LFS objects updated only by [build-mcl.yml](./.github/workflows/build-mcl.yml), so do not edit or rebuild them locally.
 - Keep the P/Invoke signatures and struct layouts in sync with the MCL headers of the shipped binaries.
+- Map header pointers strictly: `void*` to `void*`, `char*` and `uint8_t*` to `byte*`, `uint64_t*` to `ulong*`, arrays of MCL types to typed pointers, and single MCL values to `ref` (`in` when `const`). Mark members with pointer parameters `unsafe` and document caller obligations in a `/// <safety>` block, following the [C# memory safety model](https://devblogs.microsoft.com/dotnet/improving-csharp-memory-safety/).
 - Prefer the latest versions of GitHub Actions and runners.
 - Update [THIRD-PARTY-NOTICES](./THIRD-PARTY-NOTICES) when introducing a dependency if needed.
 - Keep [AGENTS.md](./AGENTS.md) in sync with the ongoing development.

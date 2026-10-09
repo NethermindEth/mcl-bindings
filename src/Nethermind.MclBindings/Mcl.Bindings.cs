@@ -366,6 +366,9 @@ public static partial class Mcl
     public static partial void mclBnFr_div(ref mclBnFr z, in mclBnFr x, in mclBnFr y);
 
     [LibraryImport(LibraryName)]
+    public static partial void mclBnFr_mulUnit(ref mclBnFr z, in mclBnFr x, uint y);
+
+    [LibraryImport(LibraryName)]
     public static partial void mclBnFp_neg(ref mclBnFp y, in mclBnFp x);
 
     [LibraryImport(LibraryName)]
@@ -385,6 +388,9 @@ public static partial class Mcl
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnFp_div(ref mclBnFp z, in mclBnFp x, in mclBnFp y);
+
+    [LibraryImport(LibraryName)]
+    public static partial void mclBnFp_mulUnit(ref mclBnFp z, in mclBnFp x, uint y);
 
     [LibraryImport(LibraryName)]
     public static partial void mclBnFp2_neg(ref mclBnFp2 y, in mclBnFp2 x);

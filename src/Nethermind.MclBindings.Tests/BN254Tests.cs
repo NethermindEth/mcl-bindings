@@ -64,6 +64,32 @@ public class BN254Tests
     }
 
     [Test]
+    public async Task Should_match_mul_unit_with_mul()
+    {
+        (int frIsEqual, int fpIsEqual) = MulUnit(7);
+
+        await Assert.That(frIsEqual).IsEqualTo(1);
+        await Assert.That(fpIsEqual).IsEqualTo(1);
+    }
+
+    private static (int FrIsEqual, int FpIsEqual) MulUnit(uint factor)
+    {
+        mclBnFr frX = default, frY = default, frActual = default, frExpected = default;
+        mclBnFr_setByCSPRNG(ref frX);
+        mclBnFr_setInt32(ref frY, (int)factor);
+        mclBnFr_mulUnit(ref frActual, in frX, factor);
+        mclBnFr_mul(ref frExpected, in frX, in frY);
+
+        mclBnFp fpX = default, fpY = default, fpActual = default, fpExpected = default;
+        mclBnFp_setByCSPRNG(ref fpX);
+        mclBnFp_setInt32(ref fpY, (int)factor);
+        mclBnFp_mulUnit(ref fpActual, in fpX, factor);
+        mclBnFp_mul(ref fpExpected, in fpX, in fpY);
+
+        return (mclBnFr_isEqual(in frActual, in frExpected), mclBnFp_isEqual(in fpActual, in fpExpected));
+    }
+
+    [Test]
     public async Task Should_match_miller_loop_vector_with_pairwise_product()
     {
         (int basePointResult, int hashResult, int isEqual) = MillerLoopVec();

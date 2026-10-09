@@ -10,7 +10,7 @@ on:
     inputs:
       publish:
         description: Publish to NuGet
-        default: None
+        default: 'No'
         type: choice
         options:
           - 'No'
@@ -67,6 +67,16 @@ jobs:
         with:
           lfs: true
 
+      - name: Detect version
+        id: version
+        working-directory: src
+        run: |
+          version_prefix=$(sed -n 's|.*<VersionPrefix>\(.*\)</VersionPrefix>.*|\1|p' Directory.Build.props)
+          version_suffix=$(sed -n 's|.*<VersionSuffix>\(.*\)</VersionSuffix>.*|\1|p' Directory.Build.props)
+          version=$version_prefix${version_suffix:+-$version_suffix}
+          echo "Detected version $version"
+          echo "version=$version" >> $GITHUB_OUTPUT
+
       - name: Set up .NET
         uses: actions/setup-dotnet@v6
 
@@ -81,6 +91,7 @@ jobs:
       - name: Publish
         working-directory: src
         run: |
-          dotnet pack ./Nethermind.MclBindings -c release
+          dotnet pack ./Nethermind.MclBindings -c release \
+            -p:Version=${{ steps.version.outputs.version }}.${{ github.run_number }}
           dotnet nuget push ./artifacts/package/release/*.nupkg \
             -k "${{ steps.login.outputs.NUGET_API_KEY }}" -s ${{ env.NUGET_SOURCE }}

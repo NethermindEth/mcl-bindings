@@ -141,6 +141,19 @@ jobs:
           mv -f win-arm64/mcl.dll win-arm64/native/mcl.dll
           mv -f win-x64/mcl.dll win-x64/native/mcl.dll
 
+      - name: Update version
+        env:
+          REF: ${{ inputs.ref }}
+        run: |
+          version=${REF#v}
+          if [[ $version =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+            # Normalize to 3 parts without leading zeros, e.g., 3.08 to 3.8.0
+            IFS=. read -r major minor patch <<< "$version"
+            version=$((10#$major)).$((10#$minor)).$((10#${patch:-0}))
+            sed -i "s|<VersionPrefix>.*</VersionPrefix>|<VersionPrefix>$version</VersionPrefix>|" \
+              src/Directory.Build.props
+          fi
+
       - name: Create a pull request
         env:
           GH_TOKEN: ${{ github.token }}
@@ -152,6 +165,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b $head_branch
           git add -A
-          git commit -am "Update MCL binaries"
+          git commit -m "$title"
           git push origin $head_branch
           gh pr create -B $GITHUB_REF_NAME -H $head_branch -t "$title" -b "Built from MCL $REF."

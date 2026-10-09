@@ -73,6 +73,9 @@ jobs:
           ref: ${{ inputs.ref }}
 
       - name: Build
+        env:
+          # Also applies to MCL's custom clang++ commands, unlike CMAKE_OSX_DEPLOYMENT_TARGET
+          MACOSX_DEPLOYMENT_TARGET: '15.0'
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=clang \

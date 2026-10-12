@@ -11,7 +11,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <PackageId>Nethermind.MclBindings</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://nethermind.io</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/nethermindeth/mcl-bindings</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>mcl bn254 bls12-381</PackageTags>
     <RepositoryType>git</RepositoryType>

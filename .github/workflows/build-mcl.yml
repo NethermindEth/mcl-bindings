@@ -44,12 +44,26 @@ jobs:
           apt-get update
           apt-get install -y --no-install-recommends build-essential clang cmake libgmp-dev
 
+      # Export only the C API and bind the library's references to it at link time (-Bsymbolic). Otherwise another mcl
+      # in the global symbol scope replaces its functions and shares its C++ statics, such as the curve parameters.
       - name: Build
         run: |
+          echo '{ global: mclBn*; local: *; };' > $RUNNER_TEMP/exports.map
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-Bsymbolic,--version-script=$RUNNER_TEMP/exports.map \
             ${{ matrix.arch == 'arm64' && '-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++' || '' }}
           cmake --build build
           strip build/lib/libmcl.so
+
+      - name: Verify symbol binding
+        run: |
+          so=build/lib/libmcl.so
+          nm -D --defined-only $so | awk '{ sub(/@.*/, "", $NF); print $NF }' | sort -u > $RUNNER_TEMP/defined
+          objdump -R $so | awk '$1 ~ /^[0-9a-f]+$/ { sub(/[@+].*/, "", $3); print $3 }' | sort -u > $RUNNER_TEMP/relocated
+          if comm -12 $RUNNER_TEMP/defined $RUNNER_TEMP/relocated | grep .; then
+            echo "::error::Symbols above are bound at run time and can be replaced by another mcl"
+            exit 1
+          fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
